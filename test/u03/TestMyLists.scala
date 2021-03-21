@@ -24,4 +24,15 @@ class TestMyLists {
       flatMap ( lst )(v => Cons ( v+1 , Cons (v+2 , Nil () ))))
     // Cons (11 , Cons (12 , Cons (21 , Cons (22 , Cons (31 , Cons (32 , Nil ()))))))
   }
+
+  @Test def testNewMap(): Unit ={
+    assertEquals(Cons(11 , Cons(21 , Cons(31 , Nil()))),map(lst)(_+1))
+    assertEquals(Cons(9 , Cons(19 , Cons(29 , Nil()))),map(lst)(_-1))
+  }
+
+  @Test def testFilter(): Unit ={
+
+  }
+
+
 }
