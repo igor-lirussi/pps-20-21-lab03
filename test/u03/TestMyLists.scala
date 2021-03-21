@@ -31,7 +31,12 @@ class TestMyLists {
   }
 
   @Test def testFilter(): Unit ={
+    //non implementato
+  }
 
+  @Test def maxTest(): Unit ={
+    assertEquals(Some(25), max( Cons(10 , Cons(25 , Cons(20 , Nil() ))))) // Some (25)
+    assertEquals(None, max(Nil()) )
   }
 
 

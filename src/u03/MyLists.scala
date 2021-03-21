@@ -36,11 +36,26 @@ object MyLists  extends App{
     def map[A,B](l: List[A])(mapper: A=>B): List[B] = flatMap(l)( x => Cons( mapper(x), Nil()))
 
 
+    //todo
     def filter[A](l1: List[A])(pred: A=>Boolean): List[A] = l1 match {
       case Cons(h,t) if (pred(h)) => Cons(h, filter(t)(pred))
       case Cons(_,t) => filter(t)(pred)
       case Nil() => Nil()
     }
+
+    //todo
+    def max(l: List[Int]): Option[Int] = {
+      def maxRec(l: List[Int])(max:Int): Int = l match {
+        case Cons(head, tail) if head>max => maxRec(tail)(head)
+        case Cons(head, tail)  => maxRec(tail)(max)
+        case Nil() => max
+      }
+      l match {
+        case Cons(head, _) => Some(maxRec(l)(head))
+        case Nil() => None
+      }
+    }
+
   }
 
 }
