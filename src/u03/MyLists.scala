@@ -90,12 +90,7 @@ object MyLists  extends App{
       case Cons(head, tail) => operator(head, foldRight(tail)(init)(operator))
       case Nil() => init  //*
     }
-
-    def foldRight2[E](list: List[E])(init:E)(operator: (E,E)=>E): E = reverse(list) match {
-      case Cons(head, tail) => operator(head, foldRight(tail)(init)(operator))
-      case Nil() => init  //*
-    }
-
+    
 
   }
 

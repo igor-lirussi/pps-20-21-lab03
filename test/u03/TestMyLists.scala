@@ -70,7 +70,6 @@ class TestMyLists {
     assertEquals(-16, foldRightReverse(lst)(0)(_ - _))
     //5-0 1-5 7--4 3-11 = (3-(7-(1-(5-0))) = -8
     assertEquals(-8, foldRight(lst)(0)(_ - _))
-
   }
 
 
