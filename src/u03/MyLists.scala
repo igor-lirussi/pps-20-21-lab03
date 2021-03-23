@@ -88,9 +88,9 @@ object MyLists  extends App{
 
     def foldRight[E](list: List[E])(init:E)(operator: (E,E)=>E): E = list match {
       case Cons(head, tail) => operator(head, foldRight(tail)(init)(operator))
-      case Nil() => init  //*
+      case Nil() => init
     }
-    
+
 
   }
 
