@@ -3,7 +3,6 @@ package u03
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import u02.SumTypes._
-import u03.MyLists.MyList.Cons
 
 class TestMyLists {
 
@@ -44,10 +43,12 @@ class TestMyLists {
 
 
   @Test def coursesTaughtTest(): Unit = {
-    //val none : List[Person] = Nil()
-    //assertEquals(Nil(), coursesTaught(none))
-    //val ppl: List[Person]= Cons ( Student("s1",10) , Cons (Teacher("Andrea", "Gerografia") , Cons ( Student("s2",20), Cons (Teacher("Bianchi", "Storia") , Cons ( Student("s3",30), Nil () )))) )
-    //assertEquals(Cons("Gerografia" , Cons ( "Storia", Nil () )), coursesTaught(ppl))
+    val none = Nil()
+    assertEquals(Nil(), coursesTaught(none))
+    val ppl = Cons(Teacher("Tizio", "Geografia"), Cons(Teacher("Tizio", "Storia"), Nil()))
+    assertEquals(Cons("Geografia" , Cons ( "Storia", Nil () )), coursesTaught(ppl))
+    val ppl2: Cons[Person with Product]= Cons ( Student("s1",10) , Cons (Teacher("Andrea", "Geografia") , Cons ( Student("s2",20), Cons (Teacher("Bianchi", "Storia") , Cons ( Student("s3",30), Nil () )))) )
+    assertEquals(Cons("Geografia" , Cons ( "Storia", Nil () )), coursesTaught(ppl2))
 
   }
 

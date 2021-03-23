@@ -62,8 +62,10 @@ object MyLists  extends App{
       }
     }
 
+    //upper type bound, function to the flatmap that goes to list with course if teacher, otherwise nothing
     def coursesTaught[P<:Person](ppl: List[P]): List[String] = flatMap(ppl)(pers => pers match {
       case Teacher(name, course) => Cons(course, Nil())
+      case _ => Nil()
     })
 
   }
