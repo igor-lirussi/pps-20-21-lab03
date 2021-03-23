@@ -47,6 +47,8 @@ object MyStreams {
       case _ => Empty()
     }
 
+    def constant[A] (const : A) : Stream[A] = cons(const, iterate(const)(x=>x))
+
   }
 }
 //
