@@ -1,5 +1,7 @@
 package u03
 
+import u02.SumTypes._
+
 object MyLists  extends App{
 
   // A generic linkedlist
@@ -33,17 +35,21 @@ object MyLists  extends App{
 
     //mapper va da elemto a elemento, la flat map vuole da elemento a lista
     //in ingresso funzione da  "x" a Lista( x mappato, nil)
-    def map[A,B](l: List[A])(mapper: A=>B): List[B] = flatMap(l)( x => Cons( mapper(x), Nil()))
+    def mapNew[A,B](l: List[A])(mapper: A=>B): List[B] = flatMap(l)(x => Cons( mapper(x), Nil()))
 
 
-    //todo
-    def filter[A](l1: List[A])(pred: A=>Boolean): List[A] = l1 match {
-      case Cons(h,t) if (pred(h)) => Cons(h, filter(t)(pred))
-      case Cons(_,t) => filter(t)(pred)
-      case Nil() => Nil()
-    }
+    //passo alla flatmap una funione che va da elemento generico a lista di elemento generico, ma solo se predicato vero, altrimenti va a lista vuota
+    def filterNew[A](l1: List[A])(pred: A=>Boolean): List[A] = flatMap(l1)(G=>G match {
+      case G if pred(G) => Cons(G, Nil())
+      case _ => Nil()
+    })
+//      l1 match {
+//      case Cons(h,t) if pred(h) => Cons(h, filter(t)(pred))
+//      case Cons(_,t) => filter(t)(pred)
+//      case Nil() => Nil()
+//    }
 
-    //todo
+    //definizione di funzione ricorsiva, scorre la lista e se la testa è maggiore del current max questo viene aggiornato
     def max(l: List[Int]): Option[Int] = {
       def maxRec(l: List[Int])(max:Int): Int = l match {
         case Cons(head, tail) if head>max => maxRec(tail)(head)
@@ -56,6 +62,11 @@ object MyLists  extends App{
       }
     }
 
+    def coursesTaught[P<:Person](ppl: List[P]): List[String] = flatMap(ppl)(pers => pers match {
+      case Teacher(name, course) => Cons(course, Nil())
+    })
+
   }
+
 
 }

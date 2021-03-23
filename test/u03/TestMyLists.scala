@@ -2,6 +2,8 @@ package u03
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import u02.SumTypes._
+import u03.MyLists.MyList.Cons
 
 class TestMyLists {
 
@@ -26,12 +28,13 @@ class TestMyLists {
   }
 
   @Test def testNewMap(): Unit ={
-    assertEquals(Cons(11 , Cons(21 , Cons(31 , Nil()))),map(lst)(_+1))
-    assertEquals(Cons(9 , Cons(19 , Cons(29 , Nil()))),map(lst)(_-1))
+    assertEquals(Cons(11 , Cons(21 , Cons(31 , Nil()))),mapNew(lst)(_+1))
+    assertEquals(Cons(9 , Cons(19 , Cons(29 , Nil()))),mapNew(lst)(_-1))
   }
 
-  @Test def testFilter(): Unit ={
-    //non implementato
+  @Test def testNewFilter(): Unit ={
+    assertEquals(Cons(10 , Cons(20 , Cons(30 , Nil()))), filterNew(lst)(_%2==0))
+    assertEquals(Cons(10 ,  Nil()), filterNew(lst)(_==10))
   }
 
   @Test def maxTest(): Unit ={
@@ -39,5 +42,13 @@ class TestMyLists {
     assertEquals(None, max(Nil()) )
   }
 
+
+  @Test def coursesTaughtTest(): Unit = {
+    //val none : List[Person] = Nil()
+    //assertEquals(Nil(), coursesTaught(none))
+    //val ppl: List[Person]= Cons ( Student("s1",10) , Cons (Teacher("Andrea", "Gerografia") , Cons ( Student("s2",20), Cons (Teacher("Bianchi", "Storia") , Cons ( Student("s3",30), Nil () )))) )
+    //assertEquals(Cons("Gerografia" , Cons ( "Storia", Nil () )), coursesTaught(ppl))
+
+  }
 
 }
