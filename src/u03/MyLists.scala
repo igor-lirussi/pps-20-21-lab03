@@ -43,11 +43,6 @@ object MyLists  extends App{
       case G if pred(G) => Cons(G, Nil())
       case _ => Nil()
     })
-//      l1 match {
-//      case Cons(h,t) if pred(h) => Cons(h, filter(t)(pred))
-//      case Cons(_,t) => filter(t)(pred)
-//      case Nil() => Nil()
-//    }
 
     //definizione di funzione ricorsiva, scorre la lista e se la testa è maggiore del current max questo viene aggiornato
     def max(l: List[Int]): Option[Int] = {
@@ -67,6 +62,40 @@ object MyLists  extends App{
       case Teacher(name, course) => Cons(course, Nil())
       case _ => Nil()
     })
+
+    def foldLeft[E](list: List[E])(init:E)(operator: (E,E)=>E): E = list match {
+      case Cons(head, tail) => /*; println(init + "op" + head + " is "+operator(init, head));*/ foldLeft(tail)( operator(init, head))(operator)
+      case Nil() => /*println( "ritorno " + init);*/ init
+    }
+    //*
+    //provato foldLeft[E,A>:E](list: List[E])(init:A)(operator: (A,E)=>A): A , cercando di lasciare che init sia o un tipo della lista o un tipo boolenano
+    //problema qui, per tornare init nel caso lista vuota senza aver fatto operazioni init è ancora di tipo E (es int) e non A (es:boolean)
+    //se la lista non è vuota alla prima operazione si prendono i due E e si da in out un A, quindi init è A
+    //causato dal fatto che uso init stesso come accumulatore, quindi se il primo elemento è 0:Int ma sto accumulando Booleani
+
+
+    def foldRightReverse[E](list: List[E])(init:E)(operator: (E,E)=>E): E =  {
+      foldLeft(reverse(list))(init)(operator)
+    }
+
+    def reverse[E] (list: List[E]): List[E] = {
+        def reverseRec (list: List[E])(listRev: List[E]): List[E] = list match {
+          case Cons(head, tail) => reverseRec(tail)(Cons(head, listRev))
+          case Nil() => listRev
+        }
+      reverseRec(list)(Nil())
+    }
+
+    def foldRight[E](list: List[E])(init:E)(operator: (E,E)=>E): E = list match {
+      case Cons(head, tail) => operator(head, foldRight(tail)(init)(operator))
+      case Nil() => init  //*
+    }
+
+    def foldRight2[E](list: List[E])(init:E)(operator: (E,E)=>E): E = reverse(list) match {
+      case Cons(head, tail) => operator(head, foldRight(tail)(init)(operator))
+      case Nil() => init  //*
+    }
+
 
   }
 

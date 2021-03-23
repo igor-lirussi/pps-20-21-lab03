@@ -52,4 +52,26 @@ class TestMyLists {
 
   }
 
+  @Test def foldTest(): Unit = {
+    val lst = Cons (3 , Cons (7 , Cons (1 , Cons (5 , Nil () ) ) ) )
+    //foldLeft
+    assertEquals(16, foldLeft(lst)(0)(_ + _) )
+    assertEquals(-16, foldLeft(lst)(0)(_ - _) )
+    val lst2 = Cons (true , Cons (true , Cons (false , Cons (true , Nil() ) ) ) )
+    assertEquals(true, foldLeft(lst2)(true)(_ || _) )
+    assertEquals(false, foldLeft(lst2)(true)(_ && _) )
+    //assertEquals(-16, foldLeft(lst)(0)(_ < _) ) impossibile
+    //reverse
+    assertEquals(Cons (5 , Cons (1 , Cons (7 , Cons (3 , Nil() ) ) ) ), reverse(lst))
+    assertEquals(Nil(), reverse(Nil()))
+    //foldRight
+    // fold right [3,7,1,5] passando 0 e con il meno
+    //0 -5 -1 -7 -3     = (((0-5)-1)-7)-3) = -16
+    assertEquals(-16, foldRightReverse(lst)(0)(_ - _))
+    //5-0 1-5 7--4 3-11 = (3-(7-(1-(5-0))) = -8
+    assertEquals(-8, foldRight(lst)(0)(_ - _))
+
+  }
+
+
 }
