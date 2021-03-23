@@ -19,5 +19,14 @@ class TestMyStreams {
     assertEquals( Cons ("x", Cons ("x", Cons ("x", Cons ("x", Cons ("x", Nil ()))))), list)
   }
 
+  @Test def fibonacciTest(): Unit ={
+    val list = MyStream.toList( MyStream.take( MyStream.fibon(1)(1) ) (8))
+    assertEquals(Cons(1,Cons(2,Cons(3,Cons(5,Cons(8,Cons(13,Cons(21,Cons(34,Nil())))))))), list)
+    println(MyStream.toList( MyStream.take( MyStream.fibon(5)(0) ) (8)))
+    val list2 = MyStream.toList ( MyStream.take ( MyStream.fibs ) (8) )
+    assertEquals(Cons (0 , Cons (1 , Cons (1 , Cons (2 , Cons (3 , Cons (5 , Cons (8 , Cons (13 , Nil ())))))))) , list2)
+
+    println(MyStream.toList( MyStream.take( MyStream.fibonReverse(1)(0) ) (8)))
+  }
 
 }

@@ -49,6 +49,29 @@ object MyStreams {
 
     def constant[A] (const : A) : Stream[A] = cons(const, iterate(const)(x=>x))
 
+    //        1           0                                 1       1+0=1    1
+    //        1           1                                 1       1+1=2    1
+    //        2           1                                 2       2+1=3    2
+    //        3           2                                 3       3+2=5    3
+    //        5           3                                 5       5+3=8    5
+    def fibon(n: => Int)(prev: => Int): Stream[Int] = cons(n, fibon(n+prev)(n))
+    //somma i due precenenti
+
+    val fibs : Stream [Int] = fibon(0)(1) //si può costruire fibonacci con il precedente di 0 come 1,
+    // così il successivo costruito è 0+1 e quindi esattamente 1 con cui iniziare la sequenza normale 0,1,...
+    //..., 5, 3, 2, 1, 1, 0, 1.
+    //attualmente si può andare indietro, cerco il numero che sommato a 1 da 0, quindi -1
+    //1,1,0, 1, -1, 2, -3, 5, -8, 13, ...
+    //il successivo andando all'indietro è l'attuale meno il precedente(-1 = 0 - 1)
+
+    def fibonReverse(n: => Int)(prev: => Int): Stream[Int] = cons(n, fibonReverse(prev-n)(n))
+
+
+    def fibonOscilla(n: => Int)(prev: => Int): Stream[Int] = cons(n, fibonOscilla(prev-n)(prev))
+    //                1           0                               1         0-1=-1    0
+    //                -1           0                               -1       0--1=1    0
+
+
   }
 }
 //
