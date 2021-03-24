@@ -58,31 +58,14 @@ object MyStreams {
     //somma i due precenenti
 
     val fibs : Stream [Int] = fibon(0)(1) //si può costruire fibonacci con il precedente di 0 come 1,
-    // così il successivo costruito è 0+1 e quindi esattamente 1 con cui iniziare la sequenza normale 0,1,...
+    // così il successivo costruito è 0+1, quindi esattamente 1 con cui iniziare la sequenza normale 0,1,...
     //..., 5, 3, 2, 1, 1, 0, 1.
-    //attualmente si può andare indietro, cerco il numero che sommato a 1 da 0, quindi -1
+    // si può andare indietro, cerco il numero che sommato a 1 da 0, quindi -1
     //1,1,0, 1, -1, 2, -3, 5, -8, 13, ...
     //il successivo andando all'indietro è l'attuale meno il precedente(-1 = 0 - 1)
 
     def fibonReverse(n: => Int)(prev: => Int): Stream[Int] = cons(n, fibonReverse(prev-n)(n))
 
 
-    def fibonOscilla(n: => Int)(prev: => Int): Stream[Int] = cons(n, fibonOscilla(prev-n)(prev))
-    //                1           0                               1         0-1=-1    0
-    //                -1           0                               -1       0--1=1    0
-
-
   }
 }
-//
-//object StreamsMain extends App {
-//  // var simplifies chaining of functions a bit..
-//  var str = Stream.iterate(0)(_+1)   // {0,1,2,3,..}
-//  str = Stream.map(str)(_+1)    // {1,2,3,4,..}
-//  str = Stream.filter(str)(x => (x < 3 || x > 20)) // {1,2,21,22,..}
-//  str = Stream.take(str)(10) // {1,2,21,22,..,28}
-//  println(Stream.toList(str)) // [1,2,21,22,..,28]
-//
-//  val corec: Stream[Int] = Stream.cons(1, corec) // {1,1,1,..}
-//  println(Stream.toList(Stream.take(corec)(10))) // [1,1,..,1]
-//}
